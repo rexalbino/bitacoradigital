@@ -1,8 +1,4 @@
-<?php
 
-
-
-?>
 <html>
     <head>
     <title>Bitacora digital</title>
@@ -100,8 +96,7 @@
         $resultado = mysqli_query($link,$sql) or die(mysql_error());
         $row = mysqli_fetch_array($resultado);
         
-        $mod_date = strtotime($row['next_date_cal']."- 10 days");
-        $diasf = date("Y-m-d",$mod_date);
+        
         //$correo = 'check@vwcamiones.com';
         
         function curdate() {
@@ -119,7 +114,9 @@
     
     //While para checar las fechas proximas
 			while($row2 = mysqli_fetch_array($resultado)):	
-		
+        
+        $mod_date = strtotime($row2['next_date_cal']."- 10 days");
+        $diasf = date("Y-m-d",$mod_date);
     if ( check_in_range($diasf, $row2['next_date_cal'], $fecha1)) {
         
         $asunto = $row2['nombre'];
@@ -139,10 +136,13 @@
 
         mail($para, $asunto, $mensaje, $cabeceras); 
         */
+    }elseif($row2['next_date_cal'] > $fecha1){
+        $dataArray2[] => 'n, ';
     }else{
-           
+            $dataArray[] => 'b, ';
         
         
+            //$paymentDate > $contractDateBegin && $paymentDate < $contractDateEnd
     }
         
      endwhile;       
@@ -205,7 +205,10 @@
       </div>
     </div>
         </div>
-        
+        <?php 
+            echo $dataArray;
+            echo $dataArray2;
+        ?>
     </body>
             <?php
     session_start();

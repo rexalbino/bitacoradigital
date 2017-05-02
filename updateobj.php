@@ -29,8 +29,8 @@ if (@!$_SESSION['user']) {
     <body class="#212121 grey darken-4">
         <?php
 
-            require("connection.php");
             
+            require("connection.php");
 
             $nombre=$_POST['nombre'];
             $serial=$_POST['serial'];
@@ -53,11 +53,12 @@ if (@!$_SESSION['user']) {
                 echo "<script language=javaScript>window.location='admin.php'</script>";
             }else{
                 copy($_FILES['flie']['tmp_name'],$archivod);
-                move_uploaded_file($_FILES["flie"]["name"], $archivo);
-                $sql="UPDATE `objeto` SET `nombre` = '$nombre', `serial` = '$serial, `marca` = '$marca', `status` = '$status', `last_date_cal` = '$lastdate', `next_date_cal` = '$nextdate', `file` = '/pdf/Catalogo.pdf' WHERE `objeto`.`id_objeto` = $id;";
-                $resultado = mysqli_query($link,$sql);
+                move_uploaded_file($_FILES["flie"]["name"], $archivod);
+                $sql="UPDATE `objeto` SET `nombre` = '$nombre', `serial` = '$serial', `marca` = '$marca', `status` = '$status', `last_date_cal` = '$lastdate', `next_date_cal` = '$nextdate', `file` = '$archivod' WHERE `objeto`.`id_objeto` = $id;";
+                mysqli_query($link,$sql);
                 echo "<script language=javaScript>alert('Articulo cargado exitosamente');</script>";
-                echo "<script language=javaScript>window.location='admin.php'</script>";
+                echo "Esto recupere: ".$archivod. "id: ".$id;
+                //echo "<script language=javaScript>window.location='admin.php'</script>";
             }
         ?>
     <div class="center-align">

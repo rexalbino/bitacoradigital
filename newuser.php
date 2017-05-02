@@ -102,29 +102,43 @@ if (@!$_SESSION['user']) {
             </form>
         </div>
     </body>
-            <footer class="page-footer,#263238 blue-grey darken-4">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">Footer Content</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
-              </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" href="javascript:abrir('terminos.html')">Terminos y condiciones</a></li>
-                  
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="footer-copyright">
-            <div class="container">
-            2017 Man shop
+
+    <?php
+        $sql4="SELECT * FROM `footer`";
+			  
+        $resultado4 = mysqli_query($link,$sql4) or die(mysql_error());
+    
+        $row4 = mysqli_fetch_array($resultado4);
+?>
+
+              <footer class="page-footer teal">
+    <div >
+      <div class="row">
+        <div class="col l6 s12">
+          <h5 class="white-text">MAN Truck & Bus</h5>
+          <p class="grey-text text-lighten-4"><?php echo $row4['des_footer']; ?></p>
             
+
+        </div>
+       
+        <div class="col l6 s12">
+          <h5 class="white-text">Otros sitios</h5>
+          <ul>
+            <li><a class="white-text" href="http://192.168.2.90/tickets/" target="_blank">Sistema Tickets</a></li>
+            <li><a class="white-text" href="http://directorio.mantruckandbus-servicio.com.mx/" target="_blank">Directorio MAN</a></li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+      <div class="footer-copyright">
+            <div class="container">
+                <?php echo $row4['author']; ?>
+                
+            <a class="grey-text text-lighten-4 right" href="#!"></a>
             </div>
           </div>
-        </footer>
+      </footer>
             
   </html>
         
